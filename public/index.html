@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="file" id="file">
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.0.0-alpha.1/axios.min.js"></script>
+  <script>
+    const file = document.getElementById('file')
+    axios.defaults.baseURL = 'http://127.0.0.1:3000'
+    file.addEventListener('change', async (e) => {
+      const formDate = new FormData()
+
+      formDate.append('file', e.target.files[0])
+
+      const { data: res } = await axios.post('/upload/file', formDate, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }
+      })
+      console.log(res);
+    })
+  </script>
+</body>
+
+</html>
